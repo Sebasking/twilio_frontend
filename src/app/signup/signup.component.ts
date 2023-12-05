@@ -11,8 +11,11 @@ import { LoginService } from '../login.service';
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
+  constructor(private loginService: LoginService) { }
+
   onSubmit(form: any) {
-    console.log(form)
-    console.log("submitting the bloodclot")
+    const { value: { email: email, password: password } } = form
+    let result = this.loginService.signUp(email, password)
+    console.log("result", result)
   }
 }

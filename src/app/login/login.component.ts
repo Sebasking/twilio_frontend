@@ -11,7 +11,12 @@ import { LoginService } from '../login.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  constructor(private loginService: LoginService) { }
+
   onLogin(form: any) {
-    console.log('submitting', form)
+    const { value: { email, password } } = form
+    let result = this.loginService.logIn(email, password)
+    console.log('result', result)
+    // console.log(form)
   }
 }
