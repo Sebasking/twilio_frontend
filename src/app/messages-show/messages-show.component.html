@@ -1,0 +1,10 @@
+<div class="message-history box">
+    <h2>Message History ({{ messages.length }})</h2>
+    <ul class="message-list">
+        <li class="message-item" *ngFor="let message of messages">
+            <span class="phone-number">{{ message.to }}</span>
+            <!-- <span class="timestamp">{{ message.timestamp | date:'medium' }}</span> -->
+            <p class="message-text">{{ message.body }}</p>
+        </li>
+    </ul>
+</div>

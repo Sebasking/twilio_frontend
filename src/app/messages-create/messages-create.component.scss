@@ -1,0 +1,107 @@
+// Variables for colors, fonts, etc.
+$background-color: #f4f4f4;
+$font-family-base: 'Arial', sans-serif;
+$text-color: #333;
+$border-color: #ddd;
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+// Mixins for repetitive styles
+@mixin box-shadow($color) {
+    box-shadow: 0 2px 5px $color;
+}
+
+@mixin border-radius($radius) {
+    border-radius: $radius;
+}
+
+// Basic reset for padding and margin
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $font-family-base;
+}
+
+body {
+    background: $background-color;
+    padding: 20px;
+    font-size: 16px;
+}
+
+.header {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+
+    .box {
+        background: #fff;
+        @include border-radius(8px);
+        @include box-shadow($shadow-color);
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .new-message {
+        flex-basis: 45%;
+    }
+
+    .message-history {
+        flex-basis: 50%;
+        max-height: 600px;
+        overflow-y: auto;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid $border-color;
+        @include border-radius(4px);
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        @include border-radius(4px);
+        cursor: pointer;
+        margin-right: 10px;
+        background: $text-color;
+        color: #fff;
+
+        &.clear-button {
+            background: $border-color;
+            color: $text-color;
+        }
+    }
+
+    .message-list {
+        list-style-type: none;
+
+        .message-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .timestamp,
+            .phone-number {
+                color: #999;
+                font-size: 0.8em;
+            }
+
+            .message-text {
+                margin-top: 5px;
+            }
+        }
+    }
+}
