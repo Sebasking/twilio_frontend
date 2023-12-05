@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MessagesCreateComponent } from './messages-create.component';
+import { LoginService } from '../login.service';
 
 describe('MessagesCreateComponent', () => {
   let component: MessagesCreateComponent;
@@ -10,8 +10,8 @@ describe('MessagesCreateComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MessagesCreateComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(MessagesCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
