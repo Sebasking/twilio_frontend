@@ -26,12 +26,12 @@ export class LoginService {
   }
 
   logIn(email: string, password: string) {
-    return this.http.post(this.baseUrl + this.loginUrl, { email, password }).pipe(catchError(this.handleError([])))
+    return this.http.post(this.baseUrl + this.loginUrl, { email, password }).subscribe(config => { console.log(config) })//.pipe(catchError(this.handleError([])))
   }
 
   signUp(email: string, password: string) {
     console.log('email', email, 'password', password)
-    return this.http.post(this.baseUrl + this.signUpUrl, { email, password }).pipe(catchError(this.handleError([])))
+    return this.http.post(this.baseUrl + this.signUpUrl, { email, password }).subscribe(config => { console.log(config) })//.pipe(catchError(this.handleError([])))
   }
 
 }

@@ -17,6 +17,5 @@ export class LoginComponent {
     const { value: { email, password } } = form
     let result = this.loginService.logIn(email, password)
     console.log('result', result)
-    // console.log(form)
   }
 }
