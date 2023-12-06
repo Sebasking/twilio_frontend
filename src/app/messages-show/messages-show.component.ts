@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { LoginService } from '../login.service';
+import { LoginService } from '../login.service';
+import { MessageService } from '../message.service';
 
 interface Message {
   to: String | undefined,

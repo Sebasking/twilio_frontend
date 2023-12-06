@@ -9,8 +9,8 @@ export class LoginService {
 
   private jwt = new BehaviorSubject('')
   private baseUrl = 'http://killthedj.ngrok.io/'
-  private signUpUrl = 'signup'
-  private loginUrl = 'login'
+  private signUpUrl = this.baseUrl + 'signup'
+  private loginUrl = this.baseUrl + 'login'
   private handleError(result: any) {
     return (error: any) => {
       return of(result)
@@ -26,12 +26,12 @@ export class LoginService {
   }
 
   logIn(email: string, password: string) {
-    return this.http.post(this.baseUrl + this.loginUrl, { email, password }).subscribe(config => { console.log(config) })//.pipe(catchError(this.handleError([])))
+    return this.http.post(this.loginUrl, { email, password }).pipe(catchError(this.handleError([])))
   }
 
   signUp(email: string, password: string) {
     console.log('email', email, 'password', password)
-    return this.http.post(this.baseUrl + this.signUpUrl, { email, password }).subscribe(config => { console.log(config) })//.pipe(catchError(this.handleError([])))
+    return this.http.post(this.signUpUrl, { email, password }).pipe(catchError(this.handleError([])))
   }
 
 }

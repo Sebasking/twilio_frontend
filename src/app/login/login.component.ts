@@ -15,7 +15,7 @@ export class LoginComponent {
 
   onLogin(form: any) {
     const { value: { email, password } } = form
-    let result = this.loginService.logIn(email, password)
+    let result = this.loginService.logIn(email, password).subscribe(jwt => this.loginService.setJwt(jwt))
     console.log('result', result)
   }
 }

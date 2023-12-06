@@ -15,7 +15,7 @@ export class SignupComponent {
 
   onSubmit(form: any) {
     const { value: { email: email, password: password } } = form
-    let result = this.loginService.signUp(email, password)
+    let result = this.loginService.signUp(email, password).subscribe(jwt => this.loginService.setJwt(jwt))
     console.log("result", result)
   }
 }
