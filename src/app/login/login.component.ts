@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,15 @@ import { LoginService } from '../login.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private _router: Router) { }
 
   onLogin(form: any) {
     const { value: { email, password } } = form
-    let result = this.loginService.logIn(email, password).subscribe(jwt => this.loginService.setJwt(jwt))
-    console.log('result', result)
+    this.loginService.logIn(email, password).subscribe(jwt => {
+      if (jwt !== '') {
+        this.loginService.setJwt(jwt)
+        this._router.navigateByUrl('/show')
+      }
+    })
   }
 }

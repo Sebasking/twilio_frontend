@@ -30,11 +30,11 @@ export class MessageService {
     this.messages.next(messages)
   }
 
-  createMessages(jwt: string, user_id: string) {
-    return this.http.post(this.createUrl, {}).pipe(catchError(this.handleError([])))
+  createMessages(jwt: string, to: string, body: string) {
+    return this.http.post(this.createUrl, { jwt, to, body }).pipe(catchError(this.handleError([])))
   }
 
-  retrieveMessages(jwt: string, user_id: string) {
+  retrieveMessages(jwt: string) {
     return this.http.get(this.showUrl).pipe(catchError(this.handleError([])))
   }
 }
