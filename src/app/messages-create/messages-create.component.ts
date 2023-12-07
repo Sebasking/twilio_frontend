@@ -14,8 +14,9 @@ import { LoginService } from '../login.service';
 export class MessagesCreateComponent {
   constructor(private loginService: LoginService, private messageService: MessageService) { }
   onSubmit() {
-    // const { value: { to, body } } = form
-    const jwt = this.loginService.getJwt
-    // let result = this.messageService.createMessages(to, body)
+    this.loginService.getJwt().subscribe(jwt => {
+      // let result = this.messageService.createMessages(jwt.toString(), to, body)
+      console.log('jwt', jwt.toString())
+    })
   }
 }

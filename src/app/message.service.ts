@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, of } from 'rxjs';
 import { Message } from './model/message';
@@ -28,10 +28,10 @@ export class MessageService {
   }
 
   createMessages(jwt: string, to: string, body: string) {
-    return this.http.post(this.createUrl, { jwt, to, body }).pipe(catchError(this.handleError([])))
+    return this.http.post(this.createUrl, { jwt, to, body }, { headers: { 'Authorization': `Bearer ${jwt}` } }).pipe(catchError(this.handleError([])))
   }
 
   retrieveMessages(jwt: string) {
-    return this.http.get(this.showUrl).pipe(catchError(this.handleError([])))
+    return this.http.get(this.showUrl, { headers: { 'Authorization': `Bearer ${jwt}` } }).pipe(catchError(this.handleError([])))
   }
 }

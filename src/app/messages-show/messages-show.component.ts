@@ -15,9 +15,10 @@ export class MessagesShowComponent implements OnInit {
   messages: Message[] = []
   constructor(private login: LoginService, private message: MessageService) { }
   ngOnInit(): void {
-    let jwt = this.login.getJwt
-    this.message.getMessages().subscribe(messages => {
-      this.messages = messages
+    this.login.getJwt().subscribe(jwt => {
+      this.message.retrieveMessages(jwt).subscribe(messages => {
+        this.messages = messages
+      })
     })
   }
 }
