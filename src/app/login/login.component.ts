@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   constructor(private loginService: LoginService, private _router: Router) { }
-
   onLogin(form: any) {
     const { value: { email, password } } = form
     this.loginService.logIn(email, password).subscribe(jwt => {

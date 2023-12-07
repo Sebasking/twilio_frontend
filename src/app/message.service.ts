@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, of } from 'rxjs';
+import { Message } from './model/message';
 
-interface Message {
-  to: string,
-  body: string
-}
 
 @Injectable({
   providedIn: 'root'

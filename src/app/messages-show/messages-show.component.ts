@@ -1,13 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../login.service';
 import { MessageService } from '../message.service';
-
-interface Message {
-  to: String | undefined,
-  body: String | undefined,
-  timestamp: String | undefined
-}
+import { Message } from '../model/message'
 
 @Component({
   selector: 'app-messages-show',
@@ -16,6 +11,13 @@ interface Message {
   templateUrl: './messages-show.component.html',
   styleUrl: './messages-show.component.scss'
 })
-export class MessagesShowComponent {
+export class MessagesShowComponent implements OnInit {
   messages: Message[] = []
+  constructor(private login: LoginService, private message: MessageService) { }
+  ngOnInit(): void {
+    let jwt = this.login.getJwt
+    this.message.getMessages().subscribe(messages => {
+      this.messages = messages
+    })
+  }
 }
