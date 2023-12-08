@@ -24,7 +24,7 @@ export class MessageService {
     return this.http.post(this.messageUrl,
       { message: { to, body } },
       {
-        headers: { 'Authorization': `Bearer ${jwt}`, 'Accept': 'application/json' },
+        headers: { 'Authorization': `${jwt}`, 'Accept': 'application/json' },
         observe: 'response'
       })
   }
@@ -32,7 +32,7 @@ export class MessageService {
   retrieveMessages(jwt: string) {
     return this.http.get(this.messageUrl,
       {
-        headers: { 'Authorization': `Bearer ${jwt}`, 'Accept': 'application/json' },
+        headers: { 'Authorization': `${jwt}`, 'Accept': 'application/json' },
         observe: 'response'
       })
   }

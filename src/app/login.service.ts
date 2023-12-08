@@ -11,6 +11,7 @@ export class LoginService {
   private baseUrl = 'http://killthedj.ngrok.io/'
   private signUpUrl = `${this.baseUrl}signup`
   private loginUrl = `${this.baseUrl}login`
+  private logOutUrl = `${this.baseUrl}logout`
   private handleError(result: any) {
     return (error: any) => {
       return of(result)
@@ -39,4 +40,11 @@ export class LoginService {
     ).pipe(catchError(this.handleError('')))
   }
 
+  signOut(jwt: string) {
+    return this.http.delete(this.logOutUrl, {
+      headers: { 'Authorization': jwt },
+      observe: 'response'
+    }
+    ).pipe(catchError(this.handleError('')))
+  }
 }

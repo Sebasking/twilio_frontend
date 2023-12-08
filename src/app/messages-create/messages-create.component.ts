@@ -31,7 +31,12 @@ export class MessagesCreateComponent {
       },
       error: (err) => {
         if (err.status === 401) {
-          this._router.navigateByUrl("/login")
+          this.loginService.signOut(this.jwt).subscribe({
+            next: (_response) => {
+              this._router.navigateByUrl("/login")
+            },
+            error: (er) => { console.log("Something went wrong") }
+          })
         }
       }
     })
