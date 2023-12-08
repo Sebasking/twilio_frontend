@@ -9,17 +9,10 @@ import { Message } from './model/message';
 })
 
 
-
 export class MessageService {
-  private baseUrl = "http://killthedj.ngrok.io/api/v1/"
-  private createUrl = this.baseUrl + '/create'
-  private showUrl = this.baseUrl + '/index'
+  private baseUrl = "http://killthedj.ngrok.io/"
+  private messageUrl = this.baseUrl + 'api/v1/messages'
   private messages = new BehaviorSubject<Message[]>([])
-  private handleError(result: any) {
-    return (error: any) => {
-      return of(result)
-    }
-  }
   constructor(private http: HttpClient) { }
 
   getMessages = this.messages.asObservable
@@ -28,10 +21,19 @@ export class MessageService {
   }
 
   createMessages(jwt: string, to: string, body: string) {
-    return this.http.post(this.createUrl, { jwt, to, body }, { headers: { 'Authorization': `Bearer ${jwt}` } }).pipe(catchError(this.handleError([])))
+    return this.http.post(this.messageUrl,
+      { message: { to, body } },
+      {
+        headers: { 'Authorization': `Bearer ${jwt}`, 'Accept': 'application/json' },
+        observe: 'response'
+      })
   }
 
   retrieveMessages(jwt: string) {
-    return this.http.get(this.showUrl, { headers: { 'Authorization': `Bearer ${jwt}` } }).pipe(catchError(this.handleError([])))
+    return this.http.get(this.messageUrl,
+      {
+        headers: { 'Authorization': `Bearer ${jwt}`, 'Accept': 'application/json' },
+        observe: 'response'
+      })
   }
 }

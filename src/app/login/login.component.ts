@@ -15,11 +15,9 @@ export class LoginComponent {
   constructor(private loginService: LoginService, private _router: Router) { }
   onLogin(form: any) {
     const { value: { email, password } } = form
-    this.loginService.logIn(email, password).subscribe(jwt => {
-      if (jwt !== '') {
-        this.loginService.setJwt(jwt)
-        this._router.navigateByUrl('/show')
-      }
+    this.loginService.logIn(email, password).subscribe(response => {
+      this.loginService.setJwt(response.headers.get('Authorization'))
+      this._router.navigateByUrl('/create')
     })
   }
 }

@@ -13,12 +13,16 @@ import { Message } from '../model/message'
 })
 export class MessagesShowComponent implements OnInit {
   messages: Message[] = []
-  constructor(private login: LoginService, private message: MessageService) { }
+  jwt = ''
+  constructor(private login: LoginService, private message: MessageService) {
+    this.login.getJwt.subscribe(jwt => this.jwt = jwt)
+  }
+
   ngOnInit(): void {
-    this.login.getJwt().subscribe(jwt => {
-      this.message.retrieveMessages(jwt).subscribe(messages => {
-        this.messages = messages
-      })
+    this.message.retrieveMessages(this.jwt).subscribe(messages => {
+      console.log("in here slime")
+      console.log(messages)
+      // this.messages = messages
     })
   }
 }

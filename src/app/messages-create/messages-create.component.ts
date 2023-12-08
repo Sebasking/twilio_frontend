@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from '../message.service';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-messages-create',
@@ -12,11 +13,27 @@ import { LoginService } from '../login.service';
   styleUrl: './messages-create.component.scss'
 })
 export class MessagesCreateComponent {
-  constructor(private loginService: LoginService, private messageService: MessageService) { }
+  private jwt = ''
+  constructor(
+    private loginService: LoginService,
+    private messageService: MessageService,
+    private _router: Router
+  ) {
+    this.loginService.getJwt.subscribe(jwt => this.jwt = jwt)
+  }
+
   onSubmit() {
-    this.loginService.getJwt().subscribe(jwt => {
-      // let result = this.messageService.createMessages(jwt.toString(), to, body)
-      console.log('jwt', jwt.toString())
+    let body = ''
+    let to = ''
+    this.messageService.createMessages(this.jwt, to, body).subscribe({
+      next: (response) => {
+        console.log(response)
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          this._router.navigateByUrl("/login")
+        }
+      }
     })
   }
 }
