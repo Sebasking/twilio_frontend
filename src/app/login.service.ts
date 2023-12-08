@@ -42,7 +42,7 @@ export class LoginService {
 
   signOut(jwt: string) {
     return this.http.delete(this.logOutUrl, {
-      headers: { 'Authorization': jwt },
+      headers: { 'Accept': 'application/json', 'Authorization': jwt },
       observe: 'response'
     }
     ).pipe(catchError(this.handleError('')))

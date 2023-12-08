@@ -20,7 +20,7 @@ export class MessageService {
     this.messages.next(messages)
   }
 
-  createMessages(jwt: string, to: string, body: string) {
+  createMessages(jwt: string, to?: string, body?: string) {
     return this.http.post(this.messageUrl,
       { message: { to, body } },
       {

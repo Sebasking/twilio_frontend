@@ -3,13 +3,12 @@
     <form (ngSubmit)="onSubmit()" #newMessageForm="ngForm">
         <div class="form-group">
             <label for="phone-number">Phone Number</label>
-            <input type="text" id="phone-number" name="phone-number" ngModel required #phoneNumber="ngModel">
+            <input type="text" id="phone-number" name="phone-number" [(ngModel)]="message.to" required>
         </div>
         <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" ngModel required #message="ngModel" rows="4"
-                maxlength="250"></textarea>
-            <small>{{ message.value.length }}/250</small>
+            <textarea id="body" name="body" [(ngModel)]="message.body" required rows="4" maxlength="250"></textarea>
+            <small>{{ message.body?.length }}/250</small>
         </div>
         <div class="form-group">
             <button type="reset" class="clear-button" (click)="newMessageForm.reset()">Clear</button>
