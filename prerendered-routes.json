@@ -1,0 +1,8 @@
+{
+  "routes": [
+    "/create",
+    "/login",
+    "/show",
+    "/signup"
+  ]
+}
