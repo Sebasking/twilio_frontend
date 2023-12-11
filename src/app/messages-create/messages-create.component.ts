@@ -37,7 +37,7 @@ export class MessagesCreateComponent {
               alert("Session is expired")
               this._router.navigateByUrl("/login")
             },
-            error: (er) => { console.log("Something went wrong") }
+            error: (er) => { alert("Something went wrong") }
           })
         }
       }
