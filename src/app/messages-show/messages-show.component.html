@@ -3,7 +3,7 @@
     <ul class="message-list">
         <li class="message-item" *ngFor="let message of messages">
             <span class="phone-number">{{ message.to }}</span>
-            <!-- <span class="timestamp">{{ message.timestamp | date:'medium' }}</span> -->
+            <span class="timestamp">{{ message.created_at | date:'medium' }}</span>
             <p class="message-text">{{ message.body }}</p>
         </li>
     </ul>

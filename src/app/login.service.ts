@@ -24,6 +24,7 @@ export class LoginService {
 
   setJwt(jwt: string) {
     this.jwt.next(jwt)
+    localStorage.setItem("twilioAppSession", jwt)
   }
 
   logIn(email: string, password: string) {

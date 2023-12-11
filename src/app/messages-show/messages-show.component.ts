@@ -13,14 +13,13 @@ import { Router } from '@angular/router';
 })
 export class MessagesShowComponent implements OnInit {
   public messages: any = []
-  jwt = ''
+  private jwt = localStorage.getItem("twilioAppSession") || ''
+
   constructor(
-    private login: LoginService,
     private message: MessageService,
-    private _router: Router
-  ) {
-    this.login.getJwt.subscribe(jwt => this.jwt = jwt)
-  }
+    private _router: Router,
+    private loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
     this.message.retrieveMessages(this.jwt).subscribe({
@@ -31,8 +30,15 @@ export class MessagesShowComponent implements OnInit {
         }
       },
       error: (err) => {
-        alert("Session is expired")
-        this._router.navigateByUrl("/login")
+        if (err.status === 401) {
+          this.loginService.signOut(this.jwt).subscribe({
+            next: (_response) => {
+              alert("Session is expired")
+              this._router.navigateByUrl("/login")
+            },
+            error: (er) => { alert("Something went wrong") }
+          })
+        }
       }
     })
   }

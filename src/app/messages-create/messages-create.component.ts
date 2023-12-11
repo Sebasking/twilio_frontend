@@ -14,15 +14,13 @@ import { Message } from '../model/message';
   styleUrl: './messages-create.component.scss'
 })
 export class MessagesCreateComponent {
-  private jwt = ''
+  private jwt = localStorage.getItem("twilioAppSession") || ''
   public message: Message = { to: '', body: '', timestamp: '' }
   constructor(
     private loginService: LoginService,
     private messageService: MessageService,
     private _router: Router
-  ) {
-    this.loginService.getJwt.subscribe(jwt => this.jwt = jwt)
-  }
+  ) { }
   onSubmit() {
     this.messageService.createMessages(this.jwt, this.message.to, this.message.body).subscribe({
       next: (response) => {
