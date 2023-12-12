@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, catchError, of } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { BehaviorSubject, catchError, of } from 'rxjs';
 export class LoginService {
 
   private jwt = new BehaviorSubject('')
-  private baseUrl = 'http://killthedj.ngrok.io/'
+  private baseUrl = environment.apiUrl
   private signUpUrl = `${this.baseUrl}signup`
   private loginUrl = `${this.baseUrl}login`
   private logOutUrl = `${this.baseUrl}logout`
