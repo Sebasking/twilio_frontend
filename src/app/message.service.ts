@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, of } from 'rxjs';
 import { Message } from './model/message';
+import { environment } from '../environments/environment';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Message } from './model/message';
 
 
 export class MessageService {
-  private baseUrl = "http://killthedj.ngrok.io/"
+  private baseUrl = environment.apiUrl;
   private messageUrl = this.baseUrl + 'api/v1/messages'
   private messages = new BehaviorSubject<Message[]>([])
   constructor(private http: HttpClient) { }
